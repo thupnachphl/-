@@ -1,0 +1,11 @@
+<h2>📦 กรอกข้อมูลสำหรับจัดส่ง</h2>
+<label>👤 ชื่อ:</label>
+<input type="text" id="customer-name" placeholder="ชื่อ-นามสกุล" required><br>
+
+<label>📞 เบอร์โทร:</label>
+<input type="tel" id="customer-phone" placeholder="เบอร์โทรศัพท์" required><br>
+
+<label>🏡 ที่อยู่:</label>
+<textarea id="customer-address" placeholder="ที่อยู่สำหรับจัดส่ง" required></textarea><br>
+
+<button onclick="placeOrder()">✅ ส่งคำสั่งซื้อผ่าน WhatsApp</button>

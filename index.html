@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ร้านชายกบหมูกะทะ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #d5d882;
+            padding: 20px;
+            margin: 0;
+        }
+        h1 {
+            color: #d9534f;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .address {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        #menu-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .menu-item {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s;
+        }
+        .menu-item:hover {
+            transform: translateY(-5px);
+        }
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        button {
+            padding: 8px 12px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .minus-btn, .plus-btn {
+            background-color: #5bc0de;
+            color: white;
+        }
+        .cart-btn {
+            background-color: #f0ad4e;
+            color: white;
+            margin-top: 10px;
+            padding: 10px 15px;
+        }
+        #cart {
+            margin-top: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            margin: auto;
+        }
+        #order-form {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .order-btn {
+            background-color: #5cb85c;
+            color: white;
+            padding: 12px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>ร้านชายกบหมูกะทะ</h1>
+    <p class="address">ที่อยู่: 187หมู่12ต.บางระกำอ.บางระกำจ.พิษณุโลก</p>
+
+    <div id="menu-list">
+        <div class="menu-item" data-name="ชุดใหญ่" data-price="109">
+            <h3>🐷 ชุดใหญ่</h3>
+            <p>ราคา: 109 บาท</p>
+            <div class="quantity-control">
+                <button class="minus-btn" onclick="changeQuantity(this, -1)">➖</button>
+                <span class="quantity">0</span>
+                <button class="plus-btn" onclick="changeQuantity(this, 1)">➕</button>
+            </div>
+            <button class="cart-btn" onclick="addToCart(this)">🛒 เพิ่มลงตะกร้า</button>
+        </div>
+        
+        <div class="menu-item" data-name="หมูสามชั้น" data-price="59">
+            <h3>🥓 หมูสามชั้นหมัก</h3>
+            <p>ราคา: 59 บาท</p>
+            <div class="quantity-control">
+                <button class="minus-btn" onclick="changeQuantity(this, -1)">➖</button>
+                <span class="quantity">0</span>
+                <button class="plus-btn" onclick="changeQuantity(this, 1)">➕</button>
+            </div>
+            <button class="cart-btn" onclick="addToCart(this)">🛒 เพิ่มลงตะกร้า</button>
+        </div>
+        
+        <div class="menu-item" data-name="หมูสันใน" data-price="59">
+            <h3>🥩 หมูสันในหมัก</h3>
+            <p>ราคา: 59 บาท</p>
+            <div class="quantity-control">
+                <button class="minus-btn" onclick="changeQuantity(this, -1)">➖</button>
+                <span class="quantity">0</span>
+                <button class="plus-btn" onclick="changeQuantity(this, 1)">➕</button>
+            </div>
+            <button class="cart-btn" onclick="addToCart(this)">🛒 เพิ่มลงตะกร้า</button>
+        </div>
+
+        <div class="menu-item" data-name="หมูหมักงา" data-price="59">
+            <h3>🥓 หมูหมักงา</h3>
+            <p>ราคา: 59 บาท</p>
+            <div class="quantity-control">
+                <button class="minus-btn" onclick="changeQuantity(this, -1)">➖</button>
+                <span class="quantity">0</span>
+                <button class="plus-btn" onclick="changeQuantity(this, 1)">➕</button>
+            </div>
+            <button class="cart-btn" onclick="addToCart(this)">🛒 เพิ่มลงตะกร้า</button>
+        </div>
+
+        <div class="menu-item" data-name="เต้าหู้ชีส" data-price="29">
+            <h3>🧀 เต้าหู้ชีส (5 ชิ้น)</h3>
+            <p>ราคา: 29 บาท</p>
+            <div class="quantity-control">
+                <button class="minus-btn" onclick="changeQuantity(this, -1)">➖</button>
+                <span class="quantity">0</span>
+                <button class="plus-btn" onclick="changeQuantity(this, 1)">➕</button>
+            </div>
+            <button class="cart-btn" onclick="addToCart(this)">🛒 เพิ่มลงตะกร้า</button>
+        </div>
+
+        <div class="menu-item" data-name="ปลาหมึกกรอบ" data-price="29">
+            <h3>🦑 ปลาหมึกกรอบ</h3>
+            <p>ราคา: 29 บาท</p>
+            <div class="quantity-control">
+                <button class="minus-btn" onclick="changeQuantity(this, -1)">➖</button>
+                <span class="quantity">0</span>
+                <button class="plus-btn" onclick="changeQuantity(this, 1)">➕</button>
+            </div>
+            <button class="cart-btn" onclick="addToCart(this)">🛒 เพิ่มลงตะกร้า</button>
+        </div>
+    </div>
+
+    
+    
+    <div id="cart">
+        <h2>🛒 ตะกร้าสินค้า</h2>
+        <div id="cart-items"></div>
+        <h3>ราคารวม: <span id="total-price">0</span> บาท</h3>
+        <button id="order-btn" onclick="showCustomerDetails()">✅ สั่งซื้อ</button>
+    </div>
+
+    <div id="customer-details" style="display: none;">
+        <h2>📦 กรอกข้อมูลสำหรับจัดส่ง</h2>
+        <label>👤 ชื่อ:</label>
+        <input type="text" id="customer-name" placeholder="ชื่อ-นามสกุล" required><br>
+
+        <label>📞 เบอร์โทร:</label>
+        <input type="tel" id="customer-phone" placeholder="เบอร์โทรศัพท์" required><br>
+
+        <label>🏡 ที่อยู่:</label>
+        <textarea id="customer-address" placeholder="ที่อยู่สำหรับจัดส่ง" required></textarea><br>
+
+        <button onclick="placeOrder()">✅ ส่งคำสั่งซื้อผ่าน WhatsApp</button>
+    </div>
+
+    <script>
+        let cart = {};  // เก็บข้อมูลตะกร้า
+
+        function changeQuantity(button, amount) {
+            let quantityElement = button.parentNode.querySelector(".quantity");
+            let currentQuantity = parseInt(quantityElement.textContent);
+            let newQuantity = currentQuantity + amount;
+            if (newQuantity < 0) newQuantity = 0;
+            quantityElement.textContent = newQuantity;
+        }
+
+        function addToCart(button) {
+            let menuItem = button.parentNode;
+            let name = menuItem.getAttribute("data-name");
+            let price = parseInt(menuItem.getAttribute("data-price"));
+            let quantity = parseInt(menuItem.querySelector(".quantity").textContent);
+
+            if (quantity > 0) {
+                if (cart[name]) {
+                    cart[name].quantity += quantity;
+                } else {
+                    cart[name] = { price: price, quantity: quantity };
+                }
+                updateCart();
+                menuItem.querySelector(".quantity").textContent = "0";  // รีเซ็ตจำนวนในเมนู
+            }
+        }
+
+        function updateCart() {
+            let cartItemsDiv = document.getElementById("cart-items");
+            cartItemsDiv.innerHTML = "";
+            let totalPrice = 0;
+
+            for (let name in cart) {
+                let item = cart[name];
+                let itemTotal = item.price * item.quantity;
+                totalPrice += itemTotal;
+
+                let cartItemDiv = document.createElement("div");
+                cartItemDiv.classList.add("cart-item");
+                cartItemDiv.innerHTML = 
+                    `<span>${name} (${item.quantity} ชิ้น)</span>
+                    <span>${itemTotal} บาท</span>
+                    <button class="remove-btn" onclick="removeFromCart('${name}')">❌</button>`;
+                cartItemsDiv.appendChild(cartItemDiv);
+            }
+
+            document.getElementById("total-price").textContent = totalPrice;
+        }
+
+        function showCustomerDetails() {
+            if (Object.keys(cart).length === 0) {
+                alert("⚠️ กรุณาเลือกสินค้าในตะกร้าก่อนทำการสั่งซื้อ!");
+                return;
+            }
+            document.getElementById("cart").style.display = "none";
+            document.getElementById("customer-details").style.display = "block";
+        }
+
+        function placeOrder() {
+            let name = document.getElementById("customer-name").value;
+            let phone = document.getElementById("customer-phone").value;
+            let address = document.getElementById("customer-address").value;
+
+            if (!name || !phone || !address) {
+                alert("⚠️ กรุณากรอกข้อมูลให้ครบถ้วน!");
+                return;
+            }
+
+            let orderSummary = "🛒 รายการสั่งซื้อ:\n";
+            let totalPrice = 0;
+
+            for (let name in cart) {
+                let item = cart[name];
+                let itemTotal = item.price * item.quantity;
+                totalPrice += itemTotal;
+                orderSummary += `✅ ${name} (${item.quantity} ชิ้น) - ${itemTotal} บาท\n`;
+            }
+
+            orderSummary += `\n💰 ราคารวมทั้งหมด: ${totalPrice} บาท\n\n🎉 ขอบคุณที่สั่งซื้อ!`;
+
+            let message = encodeURIComponent(`${orderSummary}\n\n👤 ชื่อ: ${name}\n📞 เบอร์โทร: ${phone}\n🏡 ที่อยู่: ${address}`);
+            let whatsappUrl = `https://web.whatsapp.com/send?text=${message}`;  // ใช้ WhatsApp Web
+
+            window.open(whatsappUrl, "_blank");
+
+            // Clear cart and hide customer details
+            cart = {};
+            updateCart();
+            document.getElementById("customer-details").style.display = "none";
+            alert("ส่งคำสั่งซื้อเรียบร้อยแล้ว!");
+        }
+    </script>
+</body>
+</html>

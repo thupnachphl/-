@@ -1,0 +1,33 @@
+function placeOrder() {
+    let name = document.getElementById("customer-name").value;
+    let phone = document.getElementById("customer-phone").value;
+    let address = document.getElementById("customer-address").value;
+
+    if (!name || !phone || !address) {
+        alert("⚠️ กรุณากรอกข้อมูลให้ครบถ้วน!");
+        return;
+    }
+
+    let orderSummary = "🛒 รายการสั่งซื้อ:\n";
+    let totalPrice = 0;
+
+    for (let name in cart) {
+        let item = cart[name];
+        let itemTotal = item.price * item.quantity;
+        totalPrice += itemTotal;
+        orderSummary += `✅ ${name} (${item.quantity} ชิ้น) - ${itemTotal} บาท\n`;
+    }
+
+    orderSummary += `\n💰 ราคารวมทั้งหมด: ${totalPrice} บาท\n\n🎉 ขอบคุณที่สั่งซื้อ!`;
+
+    let message = encodeURIComponent(`${orderSummary}\n\n👤 ชื่อ: ${name}\n📞 เบอร์โทร: ${phone}\n🏡 ที่อยู่: ${address}`);
+    let whatsappUrl = `https://web.whatsapp.com/`;  // ใช้ URL เพื่อส่งข้อความผ่าน WhatsApp
+
+    window.open(whatsappUrl, "_blank");
+
+    // Clear cart and hide customer details
+    cart = {};
+    updateCart();
+    document.getElementById("customer-details").style.display = "none";
+    alert("ส่งคำสั่งซื้อเรียบร้อยแล้ว!");
+}
